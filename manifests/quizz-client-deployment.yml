@@ -42,7 +42,7 @@ spec:
         - name: quizz-client
           #image: gcr.io/cheese-quizz/cheese-quizz-client:latest
           image: europe-docker.pkg.dev/cheese-quizz/container-registry/cheese-quizz-client:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           env:
           - name: QUARKUS_PROFILE
             value: kube

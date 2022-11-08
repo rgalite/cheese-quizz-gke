@@ -417,21 +417,27 @@ After some minutes, the workspace is initialized with the source files coming fr
 
 Now let's build and deploy some components in order to illustrate the development inner loop.
 
-Launch a new ternminal (`Terminal > New Terminal`), navigate to the `quizz-model` component and install it using the `mvn install` command. Here's rge terminal results below:
+Launch a new ternminal (`Terminal > New Terminal`), navigate to the `quizz-client` component and install it using the `mvn install` command. Here's the terminal results below:
 
-![code-model-install](./assets/code-model-install.png)
+![code-quizz-client-install](./assets/code-quizz-client-install.png)
 
-Then, you will be able to launch the `quizz-question` module in Quarkus development mode through terminal. Navigate to correct module and issue the `mvn quarlus:dev` command.
+Now, select `Cloud Code - Kubernetes` on the left panel and .
+At the bottom of the new panel, expand the clusters section and click on the `+` button to create a minikube cluster.
+When minikube is installed, you should see it as a new Kubernetes cluster at the bottom of the clusters list.
 
-![code-question-run](./assets/code-question-run.png)
+![code-expand-clusters](./assets/code-expand-clusters.png)
 
-Finally, you can launch the `quizz-client` module using a new terminal window this time. Navigate to correct module and issue the `mvn quarlus:dev` command as shown below. 
+Now go back up to the development sessions panel and click on the Run on Kubernetes.
 
-![code-client-run](./assets/code-client-run.png)
+Select the dev profile. In the next prompt, make sure the current context is `minikube`.
 
-Now you will have access to the GUI, running in Cloud Shell Editor, by launching the preview and configuring it on port `8081`:
+Select `Switch current context` to select `minikube` if needed.
 
-![code-client-preview](./assets/code-client-preview.png)
+When everything is deployed, you should see green marks and URLs automatically created for you to test the app.
+
+Select the cheese-quizz-client to open the GUI.
+
+![code-local-deployment-finished](./assets/code-local-deployment-finished.png)
 
 It's time to talk a little bit about Quarkus, demo hot reloading and explain how we're gonna implement the "Like Cheese" screen by modifying `src/main/resources/META-INF/index.html` and test it locally:
 

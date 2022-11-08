@@ -1,0 +1,51 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+metadata:
+  name: cheese-quizz-gke
+build:
+  artifacts:
+  - image: europe-docker.pkg.dev/cheese-quizz/container-registry/cheese-quizz-client
+    context: ./quizz-client
+    docker:      
+      dockerfile: src/main/docker/Dockerfile.jvm
+      buildArgs:
+        JAR_FILE: target/quizz-client-1.0.0-SNAPSHOT-runner.jar
+profiles:
+  - name: dev
+    deploy:
+      kubectl:
+        manifests:
+        # - istiofiles/dr-cheese-quizz-question-cb.yml
+        # - istiofiles/vs-cheese-quizz-question-all-retry-timeout.yml
+        # - istiofiles/vs-cheese-quizz-question-all.yml
+        # - istiofiles/vs-cheese-quizz-question-v1-70-v2-30.yml
+        # - istiofiles/vs-cheese-quizz-question-v1-v2-canary.yml
+        # - istiofiles/vs-cheese-quizz-question-v1.yml
+        - manifests/quizz-client-deployment.yml
+        # - manifests/quizz-client-ingress.yml
+        - manifests/quizz-client-service.yml
+        - manifests/quizz-question-deployment-v1.yml
+        - manifests/quizz-question-deployment-v2.yml
+        - manifests/quizz-question-deployment-v3.yml
+        # - manifests/quizz-question-destinationrule.yml
+        - manifests/quizz-question-service.yml
+        # - manifests/quizz-question-virtualservice-v1.yml
+  - name: prod
+    deploy:
+      kubectl:
+        manifests:
+        - istiofiles/dr-cheese-quizz-question-cb.yml
+        - istiofiles/vs-cheese-quizz-question-all-retry-timeout.yml
+        - istiofiles/vs-cheese-quizz-question-all.yml
+        - istiofiles/vs-cheese-quizz-question-v1-70-v2-30.yml
+        - istiofiles/vs-cheese-quizz-question-v1-v2-canary.yml
+        - istiofiles/vs-cheese-quizz-question-v1.yml
+        - manifests/quizz-client-deployment.yml
+        - manifests/quizz-client-ingress.yml
+        - manifests/quizz-client-service.yml
+        - manifests/quizz-question-deployment-v1.yml
+        - manifests/quizz-question-deployment-v2.yml
+        - manifests/quizz-question-deployment-v3.yml
+        - manifests/quizz-question-destinationrule.yml
+        - manifests/quizz-question-service.yml
+        - manifests/quizz-question-virtualservice-v1.yml
